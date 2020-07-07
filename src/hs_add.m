@@ -1,6 +1,12 @@
 function [ ] = hs_addfile( resourceid, filepaths, overwrite )
-% hs_add_file_to_resource Adds a file to an existing HydroShare resource 
+% HS_ADDFILE is a utility function for adding content from the MATLAB Online environment to existing HydroShare resources.
+% Usage: hs_addfile(<resourceid>, <filepaths>, <overwrite>)
+% Args:
+%   resourceid  Unique GUID of the target HydroShare resource (string)
+%   filepaths   Paths of files that will be added to the resource (string array)
+%   overwrite   Flag that indicates if existing files will be overwritten (boolean, default=false, optional)
 %   Takes a resourceid, filepath, overwrite (optional, default=FALSE)
+
 
 % check optional arguments
 if (~exist('overwrite', 'var'))

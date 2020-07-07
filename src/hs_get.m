@@ -2,11 +2,11 @@ function outpath = hs_get( resource_id, pretty_naming, replace )
 %HS_GET is a utility function for downloading HydroShare resources into 
 %       your MATLAB workspace. 
 %
-%Usage: hs_get(<resource_id>, <pretty_name> [boolean, optional], <replace> [boolean, optional]
+%Usage: hs_get(<resource_id>, <pretty_name>, <replace>)
 %Args:
-%  resource_id      The GUID of the Hydroshare resource to download
-%  pretty_naming    Renames the download using the resource title, default=false
-%  replace          Replaces existing data if it exists, default=false    
+%  resource_id      The GUID of the Hydroshare resource to download (string)
+%  pretty_naming    Renames the download using the resource title, default=false (boolean)
+%  replace          Replaces existing data if it exists, default=false (boolean)
 %Returns: 
 %  path to downloaded resource
 

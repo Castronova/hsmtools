@@ -1,6 +1,14 @@
 function [ resource_url ] = hs_create( title, abstract, keywords, filepaths )
-% hs_create Creates a HydroShare resource 
-%   Takes a title, abstract, keywords, filepaths
+% HS_CREATE is a utility function for creating new HydroShare resources from
+%           content in your MATLAB Online workspace
+% Usage: hs_create(<title>, <abstract>, <keywords>, <filepaths>)
+% Args:  
+%   title       The title for the new resource (string)
+%   abstract    The abstract for the new resource (string)
+%   keywords    Keywords that will be added to the new resource (string array)
+%   filepaths   Paths of files to add to the new resource (string array)
+% Returns: 
+%   url of the newly created HydroShare resource 
 
 % authentication
 auth = jsondecode(fileread('/code/.hs_auth'));

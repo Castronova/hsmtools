@@ -1,6 +1,11 @@
 function [ ] = hs_rename( directory )
-% hs_pretty_name Renames all HS resources in a given directory to the resource's title.
-%   Takes a directory
+% HS_RENAME is a utility function for renaming downloaded HydroShare resources from the standard GUID naming convention to the resource's title
+%
+% Usage: hs_rename(<directory>)
+% Args: 
+%   directory   The directory of the HydroShare resource that will be renamed (string)
+%
+
 
 % check optional arguments
 if (~exist('directory', 'var'))
