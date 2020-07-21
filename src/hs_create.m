@@ -18,15 +18,34 @@ opt = weboptions;
 opt.RequestMethod = 'post';
 opt.HeaderFields = headerFields;
 
+% build a cell array for the keywords in a format that HydroShare is expecting
+% the format is
+% keyword[0] = "keyword value 1"
+% keyword[1] = "keyword value 2"
+% keyword[2] = "keyword value 3"
+kw = {};
+for i=1:1:keywords.length
+    idx = i-1;
+    label = char("keywords["+idx+"]");
+    kw{end+1} = label;
+    kw{end+1} = keywords(i);
+    
+end
+
 % encode the data for upload to HydroShare
-% define the content to be downloaded
 url = 'https://www.hydroshare.org/hsapi/resource/';
-response = webwrite(url, ...
-                   'title', title, ...
-                   'abstract', abstract, ...
-                   'keywords', keywords, ...
-                   'resource_type', 'CompositeResource', ...
-                   opt);
+args = {url ...
+    'title' title ...
+    'abstract' abstract ...
+    'resource_type', 'CompositeResource' ...
+    opt};
+
+% append the keyword cell array to args
+args = [args, kw];
+
+% call the create resource endpoint using the args in the
+% cell array defined previously
+response = webwrite(args{:});
 
 % check to see if the POST was successful
 if ~any(strcmp("resource_id", fieldnames(response)))
