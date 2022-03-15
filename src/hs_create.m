@@ -11,8 +11,7 @@ function [ resource_url ] = hs_create( title, abstract, keywords, filepaths )
 %   url of the newly created HydroShare resource 
 
 % authentication
-auth = jsondecode(fileread('/code/.hs_auth'));
-access_token = auth.('access_token');
+access_token = hs_auth();
 headerFields = {'Authorization', ['Bearer ', access_token]};
 opt = weboptions;
 opt.RequestMethod = 'post';

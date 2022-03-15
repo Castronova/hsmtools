@@ -10,6 +10,11 @@ function outpath = hs_get( resource_id, pretty_naming, replace )
 %Returns: 
 %  path to downloaded resource
 
+% authentication
+access_token = hs_auth();
+headerFields = {'Authorization', ['Bearer ', access_token]};
+options = weboptions('HeaderFields', headerFields, 'ContentType','json');
+
 % check optional arguments
 if (~exist('pretty_naming', 'var'))
     pretty_naming = false; 
@@ -33,11 +38,6 @@ if (~pretty_naming)
     end
 end
 
-% authentication
-auth = jsondecode(fileread('/code/.hs_auth'));
-access_token = auth.('access_token');
-headerFields = {'Authorization', ['Bearer ', access_token]};
-options = weboptions('HeaderFields', headerFields, 'ContentType','json');
 
 % define the content to be downloaded
 base_url = 'https://hydroshare.org/hsapi/resource/';

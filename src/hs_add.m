@@ -8,6 +8,9 @@ function [ ] = hs_addfile( resourceid, filepaths, overwrite )
 %   Takes a resourceid, filepath, overwrite (optional, default=FALSE)
 
 
+% get hydroshare authentication
+access_token = hs_auth();
+
 % check optional arguments
 if (~exist('overwrite', 'var'))
     overwrite = false; 
@@ -22,9 +25,6 @@ end
 % build URL path
 url = strcat('https://www.hydroshare.org/hsapi/resource/', resourceid, '/files/');
 
-% get hydroshare authentication
-auth = jsondecode(fileread('/code/.hs_auth'));
-access_token = auth.('access_token');
 
 % set http headers for GET/POST
 headerFields = {'Authorization', ['Bearer ', access_token]};
