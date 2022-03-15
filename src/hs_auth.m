@@ -1,4 +1,4 @@
-function authfile = hs_auth( )
+function access_token = hs_auth( )
 %HS_AUTH is a utility function for obtaining HydroShare authentication 
 %       token for the current user. This is necessary to overcome a 
 %       current limitation of MO.
@@ -6,7 +6,7 @@ function authfile = hs_auth( )
 %Usage: hs_auth()
 %
 %Returns: 
-%  path to auth file or null
+%  HydroShare Authentication Token
 
 
 % list of foldernames to ignore
@@ -30,13 +30,20 @@ for k = 1 : length(children)
          % check if hs_auth is found in this directory
          if any(".hs_auth" == subchildren(:))
              authfile = join([basefolder, ".hs_auth"], "/");
+	     auth = jsondecode(fileread(authfile));
+	     access_token = auth.('access_token');
              return;
          end
 
     end
 end
 
-% return null if hs_auth is not found
-authfile = "";
+% raise an exception if .hs_auth isn't found
+errid = "hs_auth:HydroShare_Auth_NotFound";
+ME = MException(errid, ...
+        ['%s: Could not authenticate with HydroShare. ' ...
+        'Please contact help@cuahsi.org for assistance.'], errid);
+throw(ME);
+
 
 end
